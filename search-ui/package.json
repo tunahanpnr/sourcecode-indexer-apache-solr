@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "keywords": [],
+  "proxy": "http://localhost:8983/",
   "main": "src/index.tsx",
   "dependencies": {
     "@elastic/react-search-ui": "^1.19.1",

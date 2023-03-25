@@ -15,7 +15,7 @@ export default class SolrConnector implements APIConnector {
         const {searchTerm, current, filters, sort, resultsPerPage} = state;
 
         const query = "content:" + searchTerm;
-        const response = await fetch("http://localhost:8983/solr/intellij_core/query", {
+        const response = await fetch("solr/intellij_core/query", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

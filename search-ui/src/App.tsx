@@ -13,8 +13,10 @@ import {
     WithSearch
 } from "@elastic/react-search-ui";
 import {Layout} from "@elastic/react-search-ui-views";
+import SolrConnector from "./solr/solrConnector";
 
 
+const connector = new SolrConnector();
 
 const config = {
     searchQuery: {
@@ -35,6 +37,7 @@ const config = {
         facets: {},
     },
     autocompleteQuery: {},
+    apiConnector: connector,
     alwaysSearchOnInitialLoad: false
 };
 

@@ -18,6 +18,22 @@ import static org.source.indexer.config.Solr.getSolrCollectionClient;
 
 
 public class Indexer {
+    private final Set<String> contentTypes = new HashSet<>(
+            Arrays.asList(
+                    "text/x-csrc",
+                    "text/x-java",
+                    "text/javascript",
+                    "text/x-perl",
+                    "text/html",
+                    "text/css",
+                    "text/x-c++hdr",
+                    "text/x-chdr",
+                    "text/x-c++src",
+                    "text/x-python",
+                    "application/x-ruby",
+                    "text/x-scala"
+            )
+    );
     private final String codeDirPath;
     ArrayList<String> filePaths;
 
@@ -44,6 +60,11 @@ public class Indexer {
         File[] files = dir.listFiles();
         for (File file : files) {
             if (file.isFile()) {
+                String contentType = Files.probeContentType(file.toPath());
+                if (!contentTypes.contains(contentType)) {
+                    continue;
+                }
+
                 filePaths.add(file.getPath());
             } else if (file.isDirectory()) {
                 loadFiles(file.getAbsolutePath());

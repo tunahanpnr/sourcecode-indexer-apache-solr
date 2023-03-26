@@ -2,7 +2,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.code.indexer</groupId>
-    <artifactId>source-code-indexer</artifactId>
+    <artifactId>indexer</artifactId>
     <version>1</version>
 
     <dependencies>

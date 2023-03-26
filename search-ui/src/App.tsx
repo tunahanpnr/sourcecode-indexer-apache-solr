@@ -14,6 +14,7 @@ import {
 } from "@elastic/react-search-ui";
 import {Layout} from "@elastic/react-search-ui-views";
 import SolrConnector from "./solr/solrConnector";
+import {CustomPagingInfoView, CustomResultView} from "./custom/view";
 
 
 const connector = new SolrConnector();
@@ -58,14 +59,17 @@ export default function App() {
                                     }
                                     bodyContent={
                                         <Results
+                                            resultView={CustomResultView}
                                             shouldTrackClickThrough={true}
                                         />
                                     }
                                     bodyHeader={
-                                        <React.Fragment>
-                                            {wasSearched && <PagingInfo />}
-                                            {wasSearched && <ResultsPerPage />}
-                                        </React.Fragment>
+                                        <>
+                                            {wasSearched && (
+                                                <PagingInfo view={CustomPagingInfoView}/>
+                                            )}
+                                            {wasSearched && <ResultsPerPage/>}
+                                        </>
                                     }
                                     bodyFooter={<Paging/>}
                                 />

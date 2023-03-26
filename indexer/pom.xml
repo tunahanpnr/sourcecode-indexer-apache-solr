@@ -16,6 +16,11 @@
             <artifactId>solr-core</artifactId>
             <version>8.11.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tika</groupId>
+            <artifactId>tika-core</artifactId>
+            <version>2.7.0</version>
+        </dependency>
     </dependencies>
 
     <build>

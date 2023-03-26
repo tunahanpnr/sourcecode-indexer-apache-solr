@@ -3,6 +3,7 @@ package org.source.indexer;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.tika.Tika;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,13 +31,27 @@ public class Indexer {
                     "text/x-chdr",
                     "text/x-c++src",
                     "text/x-python",
-                    "application/x-ruby",
-                    "text/x-scala"
+                    "text/x-ruby",
+                    "text/x-scala",
+                    "text/x-csharp",
+                    "text/x-yaml",
+                    "text/x-prolog",
+                    "text/x-jsp",
+                    "text/x-sql",
+                    "text/x-java-properties",
+                    "text/x-perl",
+                    "text/x-pascal",
+                    "text/x-php",
+                    "application/javascript",
+                    "text/x-java-source",
+                    "text/x-erlang",
+                    "text/x-go"
             )
     );
     private final String codeDirPath;
     ArrayList<String> filePaths;
 
+    Tika tika = new Tika();
 
     public Indexer(String codeDirPath) {
         this.codeDirPath = codeDirPath;
@@ -60,11 +75,10 @@ public class Indexer {
         File[] files = dir.listFiles();
         for (File file : files) {
             if (file.isFile()) {
-                String contentType = Files.probeContentType(file.toPath());
+                String contentType = tika.detect(file);
                 if (!contentTypes.contains(contentType)) {
                     continue;
                 }
-
                 filePaths.add(file.getPath());
             } else if (file.isDirectory()) {
                 loadFiles(file.getAbsolutePath());
@@ -79,7 +93,7 @@ public class Indexer {
                 File file = new File(filePath);
 
                 String fileName = file.getName();
-                String contentType = Files.probeContentType(file.toPath());
+                String contentType = tika.detect(file);
                 String content = getFileContent(file);
                 Map<String, String> metadata = getFileMetadata(file);
 

@@ -1,5 +1,6 @@
 package org.source.indexer.utils;
 
+import org.apache.tika.Tika;
 import org.jose4j.json.internal.json_simple.JSONArray;
 import org.source.indexer.Indexer;
 
@@ -13,6 +14,7 @@ import java.util.Set;
 
 public class ContentTypeExtractor {
     private Set<String> fileTypes = new HashSet<>();
+    Tika tika = new Tika();
 
     private void getFileTypesAsSet(String dirPath) {
         try {
@@ -20,7 +22,7 @@ public class ContentTypeExtractor {
             File[] files = dir.listFiles();
             for (File file : files) {
                 if (file.isFile()) {
-                    String contentType = Files.probeContentType(file.toPath());
+                    String contentType = tika.detect(file);
                     fileTypes.add(contentType);
                 } else if (file.isDirectory()) {
                     getFileTypesAsSet(file.getAbsolutePath());

@@ -1,0 +1,24 @@
+version: '3'
+services:
+  solr:
+    image: solr:8.11.1
+    ports:
+      - "8983:8983"
+    volumes:
+      - data:/var/solr
+    container_name: solr
+    command:
+      - solr-precreate
+      - intellij_core
+  indexer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: indexer
+    command: tail -F anything
+    environment:
+      SOLR_COLLECTION_URL: "http://solr:8983/solr/intellij_core"
+    depends_on:
+      - solr
+volumes:
+  data:

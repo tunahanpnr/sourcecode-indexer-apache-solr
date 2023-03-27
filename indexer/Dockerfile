@@ -10,8 +10,7 @@ WORKDIR /app
 COPY . /app
 
 # Fetch some data from the internet
-ARG REPO_NAME="maven"
-RUN git clone https://github.com/apache/$REPO_NAME.git ./data
+RUN git clone https://github.com/apache/maven.git ./data
 
 
 # Build and run your Java application with Maven

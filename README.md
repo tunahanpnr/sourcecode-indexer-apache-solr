@@ -3,7 +3,7 @@
 Source codes are indexer applications using Solr and Java. Also, indexed data can be searched via using Elastic Search-UI with custom implementation for Solr.
 
 
-## Installation
+## Installation Local
 
 ### Indexing part
 Install Java on your system. Details can be found [here](https://www.java.com/en/download/help/download_options.html).
@@ -45,3 +45,24 @@ git clone https://github.com/tunahanpnr/sourcecode-indexer-apache-solr
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
+
+
+## Installation via Docker
+Install docker and docker-compose. [docker](https://docs.docker.com/engine/install/) [docker-compose](https://docs.docker.com/compose/install/)
+ 
+ 
+Than simply run
+ ```bash
+docker-compose up -d
+```
+If you want to run Solr with HDD index, just delete the COPY part from solr/Dockerfile.
+
+
+## Load Indexed Core
+After the running application, you can load your dump data.
+Just run the dump.sh script with these steps:
+ ```bash
+chmod +x dump.sh
+./dump.sh
+```
+

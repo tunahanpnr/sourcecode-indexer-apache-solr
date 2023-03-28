@@ -12,8 +12,6 @@ Install Apache Solr on your system, run it, and create a new core called intelli
 
 If you want to run solr with RAM index, you have to change your solrConfig.xml file with solr/solrConfig.xml which is in this repo.
 
-If you want to add more repo to index, you have to write these to indexer/Dockerfile. It is just indexing maven repo for now (because others have much bigger sizes, and it slows the process if you just want to try).
-
 Install maven on your system. Details can be found [here](https://maven.apache.org/install.html).
 
 Download or clone the source code.
@@ -61,6 +59,8 @@ COPY ./solrconfig.xml /opt/solr/server/solr/configsets/_default/conf
 ```
 
 If you don't want to run indexer, just delete the indexer part from docker-compose.
+
+If you want to add more repo to index, you have to write these to indexer/Dockerfile. It is just indexing maven repo for now (because others have much bigger sizes, and it slows the process if you just want to try).
 
 ## Load Indexed Core
 After the running application, you can load your dump data.
